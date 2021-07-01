@@ -1,0 +1,5 @@
+char | frequency | Huffman code
+\n | 1 | 00
+A | 2 | 01
+B | 2 | 11
+O | 1 | 10

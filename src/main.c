@@ -8,6 +8,7 @@
 
 #include "freq.h"
 #include "huffman.h"
+#include "decode.h"
 
 void print(FILE *output) {
   fprintf(output, "char | frequency | Huffman code\n");
@@ -50,8 +51,10 @@ int main(int argc, char **argv) {
   head->right = NULL;
 
   int is_head = 0;
+  int nchar = 0;
   for(int i = 0; i < 128; i++) {
     if(freq[i] != 0) {
+      nchar++;
       if(!is_head) { /* init head */
         head->data = (char) i;
         head->freq = freq[i];
@@ -66,7 +69,11 @@ int main(int argc, char **argv) {
   qnode *tree_head = build_huffman_tree(&head);
   get_codes(tree_head, 0, tree_head);
 
-  print(output);
+  //print(output);
+
+  char outbuff[MAX_BUFF];
+  form_buff(buff, strlen(buff), outbuff, MAX_BUFF, nchar);
+  fprintf(output, "%s\n", outbuff);
 
   fclose(input);
   fclose(output);
