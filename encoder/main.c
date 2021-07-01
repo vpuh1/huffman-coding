@@ -6,26 +6,12 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "freq.h"
+#include "io.h"
 #include "huffman.h"
-#include "decode.h"
-
-void print(FILE *output) {
-  fprintf(output, "char | frequency | Huffman code\n");
-  for(int i = 0; i < 128; i++) {
-    if(strcmp(ans[i], "\0")) {
-      if((char) i == '\n')
-        fprintf(output, "\\n | ");
-      else
-        fprintf(output, "%c | ", (char) i);
-      fprintf(output, "%ld | %s\n", freq[i], ans[i]);
-    }
-  }
-}
 
 int main(int argc, char **argv) {
   if(argc != 3) {
-    printf("usage: ./huffman <input file> <output file>\n");
+    printf("usage: huffman-encoder <input file> <output file>\n");
     return 1;
   }
   
@@ -42,8 +28,8 @@ int main(int argc, char **argv) {
   }
 
   char buff[MAX_BUFF];
-  size_t buff_size = read_buff(buff, input);
-  get_freq(buff, buff_size);
+  read_buff(buff, input);
+  get_freq(buff, strlen(buff));
 
   qnode *head = (qnode *) malloc(sizeof(qnode)); /* head for the queue */
   head->next = NULL;
@@ -66,14 +52,15 @@ int main(int argc, char **argv) {
       }
     }
   }
+
   qnode *tree_head = build_huffman_tree(&head);
   get_codes(tree_head, 0, tree_head);
 
-  //print(output);
-
-  char outbuff[MAX_BUFF];
-  form_buff(buff, strlen(buff), outbuff, MAX_BUFF, nchar);
-  fprintf(output, "%s\n", outbuff);
+  char *converted = convert(buff, MAX_BUFF);
+  if(converted) {
+    write_buff(nchar, converted, output);
+    free(converted);
+  }
 
   fclose(input);
   fclose(output);

@@ -1,7 +1,7 @@
 #ifndef __HUFFMAN_H
 #define __HUFFMAN_H
 
-char ans[128][128]; /* final codes */
+char ans[128][16]; /* final codes */
 char dp[128][16];  /* get Huffman codes using dynamic programming */
 
 typedef struct QueueNode {
