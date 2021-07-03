@@ -7,7 +7,8 @@ size_t freq[128];
 
 void read_buff(char *buff, FILE *input);
 void get_freq(char *buff, size_t size);
-char *convert(char *buff, size_t size);
-void write_buff(int nchar, char *buff, FILE *output);
+void tochar(int a, char *buff, size_t size);
+char *convert(char *buff, size_t size, int *nnulls);
+void write_buff(int nchar, int nnulls, char *buff, FILE *output);
 
 #endif

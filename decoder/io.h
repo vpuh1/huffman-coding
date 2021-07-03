@@ -5,6 +5,8 @@
 
 char ans[128][16];
 
-void read_buffer(char *buff, FILE *input);
-void 
+void chartobin(char a, char *buff, size_t size);
+int read_buffer(char *buff, FILE *input, int *nnulls);
+char *convert(char *buff, size_t size, int nnulls);
+
 #endif
