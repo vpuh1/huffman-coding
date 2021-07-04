@@ -59,7 +59,6 @@ int main(int argc, char **argv) {
     fprintf(stderr, "huffman: cannot open %s\n", argv[2]);
     return 1;
   }
-
   char buff[MAX_BUFF];
   read_buff(buff, input);
   get_freq(buff, strlen(buff));

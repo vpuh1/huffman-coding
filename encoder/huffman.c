@@ -102,7 +102,7 @@ qnode *build_huffman_tree(qnode **head) {
 
 void get_codes(qnode *cur, int k, qnode *head) {
   if(cur->left == NULL && cur->right == NULL) {
-      strcpy(ans[(int) cur->data], dp[k - 1]);
+    strcpy(ans[(int) cur->data], dp[k - 1]);
     return;
   }
   if(cur->left != NULL) {
@@ -110,9 +110,8 @@ void get_codes(qnode *cur, int k, qnode *head) {
       strcpy(dp[k], dp[k - 1]);
       dp[k][strlen(dp[k])] = '0';
     }
-    else {
+    else
       dp[k][0] = '0';
-    }
     get_codes(cur->left, k + 1, head);
   }
   if(cur->right != NULL) {
@@ -120,9 +119,8 @@ void get_codes(qnode *cur, int k, qnode *head) {
       strcpy(dp[k], dp[k - 1]);
       dp[k][strlen(dp[k])] = '1';
     }
-    else {
-       dp[k][0] = '1';
-    }
+    else
+      dp[k][0] = '1';
     get_codes(cur->right, k + 1, head);
   }
 }
